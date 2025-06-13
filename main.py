@@ -1,6 +1,11 @@
 import torch
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 
+# T5ForQuestionAnswering
+# T5ForTokenClassification
+# T5ForSequenceClassification
+# T5ForConditionalGeneration
+
 has_cuda = torch.cuda.is_available()
 
 tokenizer = T5Tokenizer.from_pretrained("google/flan-t5-large")
