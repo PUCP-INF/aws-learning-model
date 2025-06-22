@@ -1,0 +1,126 @@
+[
+  {
+    "question": "What features does Amazon S3 offer to gain visibility into storage usage?",
+    "answer": "Amazon S3 offers Amazon S3 Storage Lens, Storage Class Analysis, and S3 Inventory with Inventory reports."
+  },
+  {
+    "question": "What is S3 Storage Lens?",
+    "answer": "S3 Storage Lens provides over 60 usage and activity metrics and interactive dashboards to aggregate data for an entire organization, specific accounts, AWS Regions, buckets, or prefixes."
+  },
+  {
+    "question": "What is the purpose of Storage Class Analysis?",
+    "answer": "Storage Class Analysis is used to analyze storage access patterns to determine when to move data to a more cost-effective storage class."
+  },
+  {
+    "question": "What are S3 Inventory reports used for?",
+    "answer": "S3 Inventory reports are used to audit and report on objects and their corresponding metadata, and to configure other Amazon S3 features to take action."
+  },
+  {
+    "question": "What kind of consistency model does Amazon S3 provide for PUT and DELETE requests of objects?",
+    "answer": "Amazon S3 provides strong read-after-write consistency for PUT and DELETE requests of objects in all AWS Regions."
+  },
+  {
+    "question": "What is an object in Amazon S3?",
+    "answer": "An object is a file and any metadata that describes the file."
+  },
+  {
+    "question": "What is a bucket in Amazon S3?",
+    "answer": "A bucket is a container for objects."
+  },
+  {
+    "question": "How do you store data in Amazon S3?",
+    "answer": "To store data in Amazon S3, you first create a bucket and specify a bucket name and AWS Region, then upload your data as objects to that bucket."
+  },
+  {
+    "question": "What is an object's key?",
+    "answer": "An object's key (or key name) is the unique identifier for the object within the bucket."
+  },
+  {
+    "question": "What is S3 Versioning used for?",
+    "answer": "S3 Versioning is used to keep multiple versions of an object in the same bucket, allowing for restoration of accidentally deleted or overwritten objects."
+  },
+  {
+    "question": "How can access permissions be managed for buckets and objects in Amazon S3?",
+    "answer": "Access permissions can be managed using bucket policies, AWS Identity and Access Management (IAM) policies, access control lists (ACLs), and S3 Access Points."
+  },
+  {
+    "question": "What are the three types of buckets Amazon S3 supports?",
+    "answer": "Amazon S3 supports general purpose buckets, directory buckets, and table buckets."
+  },
+  {
+    "question": "What are general purpose buckets recommended for?",
+    "answer": "General purpose buckets are recommended for most use cases and access patterns."
+  },
+  {
+    "question": "Are general purpose buckets private by default?",
+    "answer": "Yes, by default, all general purpose buckets are private."
+  },
+  {
+    "question": "What are directory buckets recommended for?",
+    "answer": "Directory buckets are recommended for low-latency use cases and data-residency use cases."
+  },
+  {
+    "question": "Can directory buckets have public access?",
+    "answer": "No, directory buckets have all public access disabled by default, and this behavior cannot be changed."
+  },
+  {
+    "question": "What are table buckets recommended for?",
+    "answer": "Table buckets are recommended for storing tabular data, such as daily purchase transactions, streaming sensor data, or ad impressions."
+  },
+  {
+    "question": "Can table buckets be made public?",
+    "answer": "No, all table buckets and tables are private and cannot be made public."
+  },
+  {
+    "question": "What happens after a bucket is created regarding its name and Region?",
+    "answer": "After a bucket is created, its name or Region cannot be changed."
+  },
+  {
+    "question": "What do objects in Amazon S3 consist of?",
+    "answer": "Objects consist of object data and metadata."
+  },
+  {
+    "question": "How is an object uniquely identified within a bucket?",
+    "answer": "An object is uniquely identified within a bucket by a key (name) and a version ID (if S3 Versioning is enabled)."
+  },
+  {
+    "question": "What is a version ID in Amazon S3?",
+    "answer": "When S3 Versioning is enabled in a bucket, Amazon S3 generates a unique version ID for each object added to the bucket."
+  },
+  {
+    "question": "What is a bucket policy?",
+    "answer": "A bucket policy is a resource-based AWS Identity and Access Management (IAM) policy that grants access permissions to a bucket and its objects."
+  },
+  {
+    "question": "What are Amazon S3 Access Points?",
+    "answer": "Amazon S3 Access Points are named network endpoints with dedicated access policies that describe how data can be accessed using that endpoint."
+  },
+  {
+    "question": "What are Access Control Lists (ACLs) used for in Amazon S3?",
+    "answer": "ACLs are used to grant read and write permissions to authorized users for individual general purpose buckets and objects."
+  },
+  {
+    "question": "What is the recommended setting for ACLs in modern Amazon S3 use cases?",
+    "answer": "It is recommended to keep ACLs disabled, as most modern use cases no longer require them."
+  },
+  {
+    "question": "Why would you choose a specific geographical AWS Region for storing buckets?",
+    "answer": "You might choose a Region to optimize latency, minimize costs, or address regulatory requirements."
+  },
+  {
+    "question": "Do objects stored in an AWS Region ever leave that Region automatically?",
+    "answer": "No, objects stored in an AWS Region never leave the Region unless explicitly transferred or replicated to another Region."
+  },
+  {
+    "question": "What happens if two PUT requests are simultaneously made to the same key in Amazon S3?",
+    "answer": "Amazon S3 internally uses last-writer-wins semantics, meaning the request with the latest timestamp wins."
+  },
+  {
+    "question": "What is the consistency model for bucket configurations?",
+    "answer": "Bucket configurations have an eventual consistency model."
+  },
+  {
+    "question": "What AWS services can be used with data loaded into Amazon S3?",
+    "answer": "You can use Amazon S3 with services like Amazon Elastic Compute Cloud (Amazon EC2), Amazon EMR, AWS Snow Family, and AWS Transfer Family."
+  }
+]
