@@ -28,12 +28,14 @@ training_args = TrainingArguments(
     output_dir="./results",
     # evaluation_strategy="epoch",
     learning_rate=2e-5,
-    per_device_train_batch_size=8,
-    per_device_eval_batch_size=8,
+    per_device_train_batch_size=32,
+    per_device_eval_batch_size=32,
     num_train_epochs=3,
     weight_decay=0.01,
     logging_dir="./logs",
     logging_steps=10,
+    bf16=True,
+    torch_compile=True
 )
 
 # Initialize the Trainer
@@ -46,3 +48,9 @@ trainer = Trainer(
 
 # Fine-tune the model
 trainer.train()
+
+# Evaluate the model on the validation dataset
+eval_results = trainer.evaluate()
+
+# Print the evaluation results
+print(f"Evaluation results: {eval_results}")
