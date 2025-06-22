@@ -1,9 +1,11 @@
+import sys
+
 from datasets import load_dataset
 from transformers import T5Tokenizer, T5ForConditionalGeneration, Trainer, TrainingArguments
 
 # Initialize the T5 tokenizer and model (T5-small in this case)
-tokenizer = T5Tokenizer.from_pretrained("google/flan-t5-small")
-model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-small")
+tokenizer = T5Tokenizer.from_pretrained("google/flan-t5-base")
+model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-base")
 
 # Preprocessing the dataset: Prepare input-output pairs for T5
 def preprocess_function(examples):
@@ -19,7 +21,12 @@ def preprocess_function(examples):
     return model_inputs
 
 # Load the BoolQ dataset
-dataset = load_dataset("boolq")
+dataset = load_dataset("yahoo_answers_qa", trust_remote_code=True)
+yahoo_answers_qa = dataset["train"].train_test_split(test_size=0.3)
+
+print(yahoo_answers_qa)
+
+sys.exit(1)
 
 # Preprocess the dataset
 tokenized_dataset = dataset.map(preprocess_function, batched=True)

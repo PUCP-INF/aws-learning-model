@@ -1,4 +1,5 @@
 import json
+import sys
 
 from transformers import T5Tokenizer, T5ForConditionalGeneration, Trainer, TrainingArguments, DataCollatorForSeq2Seq
 
@@ -24,15 +25,16 @@ def preprocess_function(data):
     return model_inputs
 
 tokenized_dataset = dataset.map(preprocess_function, batched=True)
-split_dataset = tokenized_dataset.train_test_split(test_size=0.2, shuffle=True)
+
+#split_dataset = tokenized_dataset.train_test_split(test_size=0.2, shuffle=True)
 
 training_args = TrainingArguments(
     output_dir="./results",
     # evaluation_strategy="epoch",
     learning_rate=2e-5,
     per_device_train_batch_size=16,
-    per_device_eval_batch_size=16,
-    num_train_epochs=4,
+    # per_device_eval_batch_size=16,
+    num_train_epochs=3,
     weight_decay=0.01,
     logging_dir="./logs",
     logging_steps=10,
@@ -44,8 +46,8 @@ training_args = TrainingArguments(
 trainer = Trainer(
     model=model,
     args=training_args,
-    train_dataset=split_dataset["train"],
-    eval_dataset=split_dataset["test"],
+    train_dataset=tokenized_dataset,
+    # eval_dataset=split_dataset["test"],
     data_collator=data_collator
 )
 
@@ -53,10 +55,10 @@ trainer = Trainer(
 trainer.train()
 
 # Evaluate the model on the validation dataset
-eval_results = trainer.evaluate()
+# eval_results = trainer.evaluate()
 
 # Print the evaluation results
-print(f"Evaluation results: {eval_results}")
+# print(f"Evaluation results: {eval_results}")
 
 output_model_path = "./fine_tuned_t5_model"
 trainer.save_model(output_model_path)
