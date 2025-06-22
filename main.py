@@ -11,11 +11,15 @@ has_cuda = torch.cuda.is_available()
 tokenizer = T5Tokenizer.from_pretrained("google/flan-t5-large")
 model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-large", device_map="auto")
 
-input_text = "translate English to German: How old are you?"
-input_ids = tokenizer(input_text, return_tensors="pt").input_ids
+while True:
+    user_question = input("Enter your question: ")
+    prompt = f"Answer this question: {user_question}"
+    input_ids = tokenizer(prompt, return_tensors="pt").input_ids
 
-if has_cuda:
-    input_ids = input_ids.to("cuda")
+    if has_cuda:
+        input_ids = input_ids.to("cuda")
 
-outputs = model.generate(input_ids)
-print(tokenizer.decode(outputs[0]))
+    generated_ids = model.generate(input_ids)
+    outputs = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
+    for out in outputs:
+        print(out)
