@@ -22,9 +22,9 @@ generated_ids = model.generate(
         max_new_tokens=512,
         num_beams=1,
         do_sample=True,
-        # top_p=0.5,
-        # top_k=35,
-        # temperature=0.1
+        top_p=0.9,
+        top_k=35,
+        temperature=0.2
     )
 )
 outputs = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
