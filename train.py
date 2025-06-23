@@ -14,8 +14,8 @@ dataset = Dataset.from_list(raw_data)
 
 def preprocess_function(data):
     inputs = ["answer this question: " + q for q in data["question"]]
-    model_inputs = tokenizer(inputs, max_length=512, truncation=True)
-    labels = tokenizer(data["answer"], max_length=128, truncation=True)
+    model_inputs = tokenizer(inputs)
+    labels = tokenizer(data["answer"])
     model_inputs["labels"] = labels.input_ids
     return model_inputs
 
@@ -28,7 +28,7 @@ training_args = TrainingArguments(
     learning_rate=3e-5,
     per_device_train_batch_size=16,
     # per_device_eval_batch_size=16,
-    num_train_epochs=10,
+    num_train_epochs=3,
     weight_decay=0.01,
     logging_steps=10,
     # bf16=True

@@ -7,7 +7,7 @@ model = T5ForConditionalGeneration.from_pretrained(model_path, device_map="auto"
 
 model.eval()
 
-prompt = f"answer this question: What do objects in Amazon S3 consist of?"
+prompt = f"answer this question: How do you list all S3 buckets owned by your AWS account using the AWS CLI?"
 input_ids = tokenizer(
     prompt,
     return_tensors="pt",
@@ -22,9 +22,9 @@ generated_ids = model.generate(
         max_new_tokens=512,
         num_beams=1,
         do_sample=True,
-        top_p=0.9,
-        top_k=35,
-        temperature=0.2
+        top_p=0.95,
+        # top_k=35,
+        temperature=0.1
     )
 )
 outputs = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
