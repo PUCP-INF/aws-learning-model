@@ -22,12 +22,18 @@ cu128 = [
     "torch>=2.7.1",
     "torchvision>=0.22.1",
 ]
+rocm = [
+    "torch>=2.7.1",
+    "torchvision>=0.22.1",
+    "pytorch-triton-rocm>=3.3.0"
+]
 
 [tool.uv]
 conflicts = [
     [
         { extra = "cpu" },
         { extra = "cu128" },
+        { extra = "rocm" },
     ],
 ]
 
@@ -35,10 +41,15 @@ conflicts = [
 torch = [
     { index = "pytorch-cpu", extra = "cpu" },
     { index = "pytorch-cu128", extra = "cu128" },
+    { index = "pytorch-rocm", extra = "rocm" },
 ]
 torchvision = [
     { index = "pytorch-cpu", extra = "cpu" },
     { index = "pytorch-cu128", extra = "cu128" },
+    { index = "pytorch-rocm", extra = "rocm" },
+]
+pytorch-triton-rocm = [
+  { index = "pytorch-rocm", extra = "rocm" },
 ]
 
 [[tool.uv.index]]
@@ -49,4 +60,9 @@ explicit = true
 [[tool.uv.index]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-rocm"
+url = "https://download.pytorch.org/whl/rocm6.3"
 explicit = true

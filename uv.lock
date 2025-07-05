@@ -2,16 +2,18 @@ version = 1
 revision = 2
 requires-python = ">=3.12"
 resolution-markers = [
-    "(platform_machine != 'aarch64' and extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')",
-    "platform_machine == 'aarch64' and sys_platform == 'linux' and extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128'",
-    "(platform_machine != 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128') or (sys_platform != 'darwin' and sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128')",
-    "platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128'",
-    "sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128'",
-    "extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128'",
+    "extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm'",
+    "(platform_machine != 'aarch64' and extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm')",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm'",
+    "(platform_machine != 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm') or (sys_platform != 'darwin' and sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm')",
+    "platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm'",
+    "sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm'",
+    "extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm'",
 ]
 conflicts = [[
     { package = "aws-learning-model", extra = "cpu" },
     { package = "aws-learning-model", extra = "cu128" },
+    { package = "aws-learning-model", extra = "rocm" },
 ]]
 
 [[package]]
@@ -25,10 +27,11 @@ dependencies = [
     { name = "psutil" },
     { name = "pyyaml" },
     { name = "safetensors" },
-    { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128')" },
-    { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "torch", version = "2.7.1+cu128", source = { registry = "https://download.pytorch.org/whl/cu128" }, marker = "extra == 'extra-18-aws-learning-model-cu128'" },
+    { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "torch", version = "2.7.1", source = { registry = "https://pypi.org/simple" }, marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm')" },
+    { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "torch", version = "2.7.1+cu128", source = { registry = "https://download.pytorch.org/whl/cu128" }, marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "torch", version = "2.7.1+rocm6.3", source = { registry = "https://download.pytorch.org/whl/rocm6.3" }, marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/bd/c2/b9e33ad13232606dded4c546e654fb06a15f1dbcbd95d81c9f9dd3ccc771/accelerate-1.8.1.tar.gz", hash = "sha256:f60df931671bc4e75077b852990469d4991ce8bd3a58e72375c3c95132034db9", size = 380872, upload-time = "2025-06-20T15:36:14.618Z" }
 wheels = [
@@ -131,15 +134,20 @@ dependencies = [
 
 [package.optional-dependencies]
 cpu = [
-    { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "torchvision", version = "0.22.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu') or (platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "torchvision", version = "0.22.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(platform_machine != 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu') or (sys_platform != 'darwin' and sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu') or (sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
+    { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "torchvision", version = "0.22.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu') or (platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "torchvision", version = "0.22.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(platform_machine != 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu') or (sys_platform != 'darwin' and sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu') or (sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 cu128 = [
     { name = "torch", version = "2.7.1+cu128", source = { registry = "https://download.pytorch.org/whl/cu128" } },
-    { name = "torchvision", version = "0.22.1", source = { registry = "https://download.pytorch.org/whl/cu128" }, marker = "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "torchvision", version = "0.22.1+cu128", source = { registry = "https://download.pytorch.org/whl/cu128" }, marker = "(platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
+    { name = "torchvision", version = "0.22.1", source = { registry = "https://download.pytorch.org/whl/cu128" }, marker = "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "torchvision", version = "0.22.1+cu128", source = { registry = "https://download.pytorch.org/whl/cu128" }, marker = "(platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+]
+rocm = [
+    { name = "pytorch-triton-rocm" },
+    { name = "torch", version = "2.7.1+rocm6.3", source = { registry = "https://download.pytorch.org/whl/rocm6.3" } },
+    { name = "torchvision", version = "0.22.1+rocm6.3", source = { registry = "https://download.pytorch.org/whl/rocm6.3" } },
 ]
 
 [package.metadata]
@@ -148,14 +156,17 @@ requires-dist = [
     { name = "datasets", specifier = ">=3.6.0" },
     { name = "huggingface-hub", extras = ["hf-xet"], specifier = ">=0.32.4" },
     { name = "protobuf", specifier = ">=6.31.1" },
+    { name = "pytorch-triton-rocm", marker = "extra == 'rocm'", specifier = ">=3.3.0", index = "https://download.pytorch.org/whl/rocm6.3", conflict = { package = "aws-learning-model", extra = "rocm" } },
     { name = "sentencepiece", specifier = ">=0.2.0" },
     { name = "torch", marker = "extra == 'cpu'", specifier = ">=2.7.1", index = "https://download.pytorch.org/whl/cpu", conflict = { package = "aws-learning-model", extra = "cpu" } },
     { name = "torch", marker = "extra == 'cu128'", specifier = ">=2.7.1", index = "https://download.pytorch.org/whl/cu128", conflict = { package = "aws-learning-model", extra = "cu128" } },
+    { name = "torch", marker = "extra == 'rocm'", specifier = ">=2.7.1", index = "https://download.pytorch.org/whl/rocm6.3", conflict = { package = "aws-learning-model", extra = "rocm" } },
     { name = "torchvision", marker = "extra == 'cpu'", specifier = ">=0.22.1", index = "https://download.pytorch.org/whl/cpu", conflict = { package = "aws-learning-model", extra = "cpu" } },
     { name = "torchvision", marker = "extra == 'cu128'", specifier = ">=0.22.1", index = "https://download.pytorch.org/whl/cu128", conflict = { package = "aws-learning-model", extra = "cu128" } },
+    { name = "torchvision", marker = "extra == 'rocm'", specifier = ">=0.22.1", index = "https://download.pytorch.org/whl/rocm6.3", conflict = { package = "aws-learning-model", extra = "rocm" } },
     { name = "transformers", specifier = ">=4.52.4" },
 ]
-provides-extras = ["cpu", "cu128"]
+provides-extras = ["cpu", "cu128", "rocm"]
 
 [[package]]
 name = "certifi"
@@ -348,7 +359,7 @@ source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "filelock" },
     { name = "fsspec" },
-    { name = "hf-xet", marker = "platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'arm64' or platform_machine == 'x86_64' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
+    { name = "hf-xet", marker = "platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'arm64' or platform_machine == 'x86_64' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
     { name = "packaging" },
     { name = "pyyaml" },
     { name = "requests" },
@@ -607,7 +618,7 @@ name = "nvidia-cudnn-cu12"
 version = "9.7.1.26"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-cublas-cu12", marker = "(platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
+    { name = "nvidia-cublas-cu12", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c1/2e/ec5dda717eeb1de3afbbbb611ca556f9d6d057470759c6abd36d72f0063b/nvidia_cudnn_cu12-9.7.1.26-py3-none-manylinux_2_27_aarch64.whl", hash = "sha256:848a61d40ef3b32bd4e1fadb599f0cf04a4b942fbe5fb3be572ad75f9b8c53ef", size = 725862213, upload-time = "2025-02-06T22:14:57.169Z" },
@@ -620,7 +631,7 @@ name = "nvidia-cufft-cu12"
 version = "11.3.3.41"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/72/95/6157cb45a49f5090a470de42353a22a0ed5b13077886dca891b4b0e350fe/nvidia_cufft_cu12-11.3.3.41-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:68509dcd7e3306e69d0e2d8a6d21c8b25ed62e6df8aac192ce752f17677398b5", size = 193108626, upload-time = "2025-01-23T17:55:49.192Z" },
@@ -652,9 +663,9 @@ name = "nvidia-cusolver-cu12"
 version = "11.7.2.55"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-cublas-cu12", marker = "(platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-cusparse-cu12", marker = "(platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
+    { name = "nvidia-cublas-cu12", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-cusparse-cu12", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8c/ce/4214a892e804b20bf66d04f04a473006fc2d3dac158160ef85f1bc906639/nvidia_cusolver_cu12-11.7.2.55-py3-none-manylinux_2_27_aarch64.whl", hash = "sha256:0fd9e98246f43c15bee5561147ad235dfdf2d037f5d07c9d41af3f7f72feb7cc", size = 260094827, upload-time = "2025-01-23T17:58:17.586Z" },
@@ -667,7 +678,7 @@ name = "nvidia-cusparse-cu12"
 version = "12.5.7.53"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/2e/a2/313db0453087f5324a5900380ca2e57e050c8de76f407b5e11383dc762ae/nvidia_cusparse_cu12-12.5.7.53-py3-none-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:d869c6146ca80f4305b62e02d924b4aaced936f8173e3cef536a67eed2a91af1", size = 291963692, upload-time = "2025-01-23T17:59:40.325Z" },
@@ -932,6 +943,19 @@ wheels = [
 ]
 
 [[package]]
+name = "pytorch-triton-rocm"
+version = "3.3.1"
+source = { registry = "https://download.pytorch.org/whl/rocm6.3" }
+dependencies = [
+    { name = "setuptools", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/pytorch_triton_rocm-3.3.1-cp312-cp312-linux_x86_64.whl", hash = "sha256:977423eee5c542a3f8aa4f527aec1688c4d485f207089cb595a8e638fcc3888a" },
+    { url = "https://download.pytorch.org/whl/pytorch_triton_rocm-3.3.1-cp313-cp313-linux_x86_64.whl", hash = "sha256:104d1087692ea24dbfdb178b7a245c59b04d2121540587e392e30a668cf98edd" },
+    { url = "https://download.pytorch.org/whl/pytorch_triton_rocm-3.3.1-cp313-cp313t-linux_x86_64.whl", hash = "sha256:dd521c3f3679a79081ebaa9a416d2090b0d3970a157e0bbe1e163dc75e8da4bf" },
+]
+
+[[package]]
 name = "pytz"
 version = "2025.2"
 source = { registry = "https://pypi.org/simple" }
@@ -1120,13 +1144,13 @@ resolution-markers = [
     "sys_platform == 'darwin'",
 ]
 dependencies = [
-    { name = "filelock", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "fsspec", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "jinja2", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "networkx", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "setuptools", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "sympy", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "typing-extensions", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
+    { name = "filelock", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "fsspec", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "jinja2", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "networkx", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "setuptools", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "sympy", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "typing-extensions", marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 wheels = [
     { url = "https://download.pytorch.org/whl/cpu/torch-2.7.1-cp312-none-macosx_11_0_arm64.whl", hash = "sha256:7b4f8b2b83bd08f7d399025a9a7b323bdbb53d20566f1e0d584689bb92d82f9a" },
@@ -1139,13 +1163,13 @@ name = "torch"
 version = "2.7.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "filelock", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128')" },
-    { name = "fsspec", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128')" },
-    { name = "jinja2", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128')" },
-    { name = "networkx", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128')" },
-    { name = "setuptools", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128')" },
-    { name = "sympy", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128')" },
-    { name = "typing-extensions", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128')" },
+    { name = "filelock", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm')" },
+    { name = "fsspec", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm')" },
+    { name = "jinja2", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm')" },
+    { name = "networkx", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm')" },
+    { name = "setuptools", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm')" },
+    { name = "sympy", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm')" },
+    { name = "typing-extensions", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra != 'extra-18-aws-learning-model-cu128' and extra != 'extra-18-aws-learning-model-rocm')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/87/93/fb505a5022a2e908d81fe9a5e0aa84c86c0d5f408173be71c6018836f34e/torch-2.7.1-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:27ea1e518df4c9de73af7e8a720770f3628e7f667280bce2be7a16292697e3fa", size = 98948276, upload-time = "2025-06-04T17:39:12.852Z" },
@@ -1171,13 +1195,13 @@ resolution-markers = [
     "platform_machine == 'aarch64' and sys_platform == 'linux'",
 ]
 dependencies = [
-    { name = "filelock", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "fsspec", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "jinja2", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "networkx", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "setuptools", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "sympy", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "typing-extensions", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
+    { name = "filelock", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "fsspec", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "jinja2", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "networkx", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "setuptools", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "sympy", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "typing-extensions", marker = "(sys_platform != 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 wheels = [
     { url = "https://download.pytorch.org/whl/cpu/torch-2.7.1%2Bcpu-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:3bf2db5adf77b433844f080887ade049c4705ddf9fe1a32023ff84ff735aa5ad" },
@@ -1200,28 +1224,28 @@ resolution-markers = [
     "platform_machine == 'aarch64' and sys_platform == 'linux'",
 ]
 dependencies = [
-    { name = "filelock", marker = "extra == 'extra-18-aws-learning-model-cu128'" },
-    { name = "fsspec", marker = "extra == 'extra-18-aws-learning-model-cu128'" },
-    { name = "jinja2", marker = "extra == 'extra-18-aws-learning-model-cu128'" },
-    { name = "networkx", marker = "extra == 'extra-18-aws-learning-model-cu128'" },
-    { name = "nvidia-cublas-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-cuda-cupti-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-cuda-nvrtc-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-cuda-runtime-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-cudnn-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-cufft-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-cufile-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-curand-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-cusolver-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-cusparse-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-cusparselt-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-nccl-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "nvidia-nvtx-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "setuptools", marker = "extra == 'extra-18-aws-learning-model-cu128'" },
-    { name = "sympy", marker = "extra == 'extra-18-aws-learning-model-cu128'" },
-    { name = "triton", marker = "(sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "typing-extensions", marker = "extra == 'extra-18-aws-learning-model-cu128'" },
+    { name = "filelock", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "fsspec", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "jinja2", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "networkx", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-cublas-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-cuda-cupti-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-cuda-nvrtc-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-cuda-runtime-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-cudnn-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-cufft-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-cufile-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-curand-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-cusolver-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-cusparse-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-cusparselt-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-nccl-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-nvjitlink-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "nvidia-nvtx-cu12", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "setuptools", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "sympy", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "triton", marker = "(sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "typing-extensions", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 wheels = [
     { url = "https://download.pytorch.org/whl/cu128/torch-2.7.1%2Bcu128-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:268e54db9f0bc2b7b9eb089852d3e592c2dea2facc3db494100c3d3b796549fa" },
@@ -1236,6 +1260,26 @@ wheels = [
 ]
 
 [[package]]
+name = "torch"
+version = "2.7.1+rocm6.3"
+source = { registry = "https://download.pytorch.org/whl/rocm6.3" }
+dependencies = [
+    { name = "filelock", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "fsspec", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "jinja2", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "networkx", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "pytorch-triton-rocm", marker = "(platform_machine == 'x86_64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-rocm') or (platform_machine != 'x86_64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "setuptools", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "sympy", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "typing-extensions", marker = "(extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra != 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/rocm6.3/torch-2.7.1%2Brocm6.3-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:b0c10342f64a34998ae8d5084aa1beae7e11defa46a4e05fe9aa6f09ffb0db37" },
+    { url = "https://download.pytorch.org/whl/rocm6.3/torch-2.7.1%2Brocm6.3-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:1650ff47f4cd45e5ba222e943e6e0697eb5f1cff15045ffdafe4feb8c279cb93" },
+    { url = "https://download.pytorch.org/whl/rocm6.3/torch-2.7.1%2Brocm6.3-cp313-cp313t-manylinux_2_28_x86_64.whl", hash = "sha256:adfc55a2704c7b58a3475a409fe6ff619bbc4abbe28127fbcf12cc17e441fd1a" },
+]
+
+[[package]]
 name = "torchvision"
 version = "0.22.1"
 source = { registry = "https://download.pytorch.org/whl/cpu" }
@@ -1246,8 +1290,8 @@ resolution-markers = [
 dependencies = [
     { name = "numpy", marker = "(platform_machine == 'aarch64' and sys_platform == 'linux') or sys_platform == 'darwin'" },
     { name = "pillow", marker = "(platform_machine == 'aarch64' and sys_platform == 'linux') or sys_platform == 'darwin'" },
-    { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
-    { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu') or (platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
+    { name = "torch", version = "2.7.1", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(sys_platform == 'darwin' and extra == 'extra-18-aws-learning-model-cpu') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
+    { name = "torch", version = "2.7.1+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "(platform_machine == 'aarch64' and sys_platform == 'linux' and extra == 'extra-18-aws-learning-model-cpu') or (platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (platform_machine != 'aarch64' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (sys_platform != 'linux' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm') or (extra != 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 wheels = [
     { url = "https://download.pytorch.org/whl/cpu/torchvision-0.22.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:153f1790e505bd6da123e21eee6e83e2e155df05c0fe7d56347303067d8543c5" },
@@ -1319,11 +1363,26 @@ wheels = [
 ]
 
 [[package]]
+name = "torchvision"
+version = "0.22.1+rocm6.3"
+source = { registry = "https://download.pytorch.org/whl/rocm6.3" }
+dependencies = [
+    { name = "numpy" },
+    { name = "pillow" },
+    { name = "torch", version = "2.7.1+rocm6.3", source = { registry = "https://download.pytorch.org/whl/rocm6.3" } },
+]
+wheels = [
+    { url = "https://download.pytorch.org/whl/rocm6.3/torchvision-0.22.1%2Brocm6.3-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:0dce205fb04d9eb2f6feb74faf17cba9180aff70a8c8ac084912ce41b2dc0ab7" },
+    { url = "https://download.pytorch.org/whl/rocm6.3/torchvision-0.22.1%2Brocm6.3-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:565ace3680d37c7d39ec8da758333fa13fafb30317b6d4c3b389d46430f11a2b" },
+    { url = "https://download.pytorch.org/whl/rocm6.3/torchvision-0.22.1%2Brocm6.3-cp313-cp313t-manylinux_2_28_x86_64.whl", hash = "sha256:c377ae873066de8441fe9f7783b3ff88ced7996df7e3556ef32b95fd977fb351" },
+]
+
+[[package]]
 name = "tqdm"
 version = "4.67.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128')" },
+    { name = "colorama", marker = "sys_platform == 'win32' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-cu128') or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm') or (extra == 'extra-18-aws-learning-model-cu128' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/a8/4b/29b4ef32e036bb34e4ab51796dd745cdba7ed47ad142a9f4a1eb8e0c744d/tqdm-4.67.1.tar.gz", hash = "sha256:f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2", size = 169737, upload-time = "2024-11-24T20:12:22.481Z" }
 wheels = [
@@ -1356,7 +1415,7 @@ name = "triton"
 version = "3.3.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "setuptools", marker = "extra == 'extra-18-aws-learning-model-cu128'" },
+    { name = "setuptools", marker = "extra == 'extra-18-aws-learning-model-cu128' or (extra == 'extra-18-aws-learning-model-cpu' and extra == 'extra-18-aws-learning-model-rocm')" },
 ]
 wheels = [
     { url = "https://files.pythonhosted.org/packages/24/5f/950fb373bf9c01ad4eb5a8cd5eaf32cdf9e238c02f9293557a2129b9c4ac/triton-3.3.1-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:9999e83aba21e1a78c1f36f21bce621b77bcaa530277a50484a7cb4a822f6e43", size = 155669138, upload-time = "2025-05-29T23:39:51.771Z" },
