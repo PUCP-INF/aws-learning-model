@@ -1,25 +1,44 @@
-import torch
-from transformers import T5Tokenizer, T5ForConditionalGeneration
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
-# T5ForQuestionAnswering
-# T5ForTokenClassification
-# T5ForSequenceClassification
-# T5ForConditionalGeneration
+model_name = "Qwen/Qwen3-8B"
 
-has_cuda = torch.cuda.is_available()
+# load the tokenizer and the model
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForCausalLM.from_pretrained(
+    model_name,
+    torch_dtype="auto",
+    device_map="auto"
+)
 
-tokenizer = T5Tokenizer.from_pretrained("google/flan-t5-large")
-model = T5ForConditionalGeneration.from_pretrained("google/flan-t5-large", device_map="auto")
+# prepare the model input
+prompt = "Give me a short introduction to large language model."
+messages = [
+    {"role": "user", "content": prompt}
+]
+text = tokenizer.apply_chat_template(
+    messages,
+    tokenize=False,
+    add_generation_prompt=True,
+    enable_thinking=True # Switches between thinking and non-thinking modes. Default is True.
+)
+model_inputs = tokenizer([text], return_tensors="pt").to(model.device)
 
-while True:
-    user_question = input("Enter your question: ")
-    prompt = f"Answer this question: {user_question}"
-    input_ids = tokenizer(prompt, return_tensors="pt").input_ids
+# conduct text completion
+generated_ids = model.generate(
+    **model_inputs,
+    max_new_tokens=32768
+)
+output_ids = generated_ids[0][len(model_inputs.input_ids[0]):].tolist()
 
-    if has_cuda:
-        input_ids = input_ids.to("cuda")
+# parsing thinking content
+try:
+    # rindex finding 151668 (</think>)
+    index = len(output_ids) - output_ids[::-1].index(151668)
+except ValueError:
+    index = 0
 
-    generated_ids = model.generate(input_ids)
-    outputs = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
-    for out in outputs:
-        print(out)
+thinking_content = tokenizer.decode(output_ids[:index], skip_special_tokens=True).strip("\n")
+content = tokenizer.decode(output_ids[index:], skip_special_tokens=True).strip("\n")
+
+print("thinking content:", thinking_content)
+print("content:", content)
