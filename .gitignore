@@ -1,3 +1,4 @@
 .idea
 results/
 fine_tuned_t5_model/
+chroma_langchain_db/

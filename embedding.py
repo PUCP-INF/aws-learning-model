@@ -1,39 +1,31 @@
-# Requires transformers>=4.51.0
-# Requires sentence-transformers>=2.7.0
+import bs4
+from langchain_chroma import Chroma
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.document_loaders import WebBaseLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from sentence_transformers import SentenceTransformer
+embeddings = HuggingFaceEmbeddings(model_name="Qwen/Qwen3-Embedding-0.6B")
 
-# Load the model
-model = SentenceTransformer("Qwen/Qwen3-Embedding-0.6B")
+vector_store = Chroma(
+    collection_name="example_collection",
+    embedding_function=embeddings,
+    persist_directory="./chroma_langchain_db",  # Where to save data locally, remove if not necessary
+)
 
-# We recommend enabling flash_attention_2 for better acceleration and memory saving,
-# together with setting `padding_side` to "left":
-# model = SentenceTransformer(
-#     "Qwen/Qwen3-Embedding-8B",
-#     model_kwargs={"attn_implementation": "flash_attention_2", "device_map": "auto"},
-#     tokenizer_kwargs={"padding_side": "left"},
-# )
+# Load and chunk contents of the blog
+loader = WebBaseLoader(
+    web_paths=("https://lilianweng.github.io/posts/2023-06-23-agent/",),
+    bs_kwargs=dict(
+        parse_only=bs4.SoupStrainer(
+            class_=("post-content", "post-title", "post-header")
+        )
+    ),
+)
+docs = loader.load()
 
-# The queries and documents to embed
-queries = [
-    "What is the capital of China?",
-    "Explain gravity",
-]
-documents = [
-    "The capital of China is Beijing.",
-    "Gravity is a force that attracts two bodies towards each other. It gives weight to physical objects and is responsible for the movement of planets around the sun.",
-]
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 
-# Encode the queries and documents. Note that queries benefit from using a prompt
-# Here we use the prompt called "query" stored under `model.prompts`, but you can
-# also pass your own prompt via the `prompt` argument
-query_embeddings = model.encode(queries, prompt_name="query")
-print(query_embeddings)
-document_embeddings = model.encode(documents)
-print(document_embeddings)
+all_splits = text_splitter.split_documents(docs)
 
-# Compute the (cosine) similarity between the query and document embeddings
-similarity = model.similarity(query_embeddings, document_embeddings)
-print(similarity)
-# tensor([[0.7493, 0.0751],
-#         [0.0880, 0.6318]])
+# Index chunks
+_ = vector_store.add_documents(documents=all_splits)
