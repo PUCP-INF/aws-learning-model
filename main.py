@@ -34,8 +34,16 @@ retriever = vector_store.as_retriever(
 combine_docs_chain = create_stuff_documents_chain(llm, prompt)
 retrieval_chain = create_retrieval_chain(retriever, combine_docs_chain)
 
-result = retrieval_chain.invoke({
-    "input": "Que lenguajes de programación y/o framework puedo usar para mi proyecto"
-})
+# "Cómo puedo hacer que mi backend y frontend se comuniquen"
+while True:
+    query = input("Ingrese consulta: ")
+    if query == "EXIT":
+        break
 
-print(result["answer"])
+    result = retrieval_chain.invoke({
+        "input": query
+    })
+
+    print(result["answer"])
+
+
