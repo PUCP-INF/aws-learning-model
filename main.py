@@ -23,7 +23,7 @@ Answer in spanish briefly
 {context}
 
 Question: {input}
-Answer:""")
+Answer: /no_think""")
 
 retriever = vector_store.as_retriever(
     search_type="similarity",
@@ -35,14 +35,19 @@ retrieval_chain = create_retrieval_chain(retriever, combine_docs_chain)
 
 # "Cómo puedo hacer que mi backend y frontend se comuniquen"
 while True:
-    query = input("Ingrese consulta: ")
+    query = input(">Ingrese consulta: ")
     if query == "EXIT":
         break
 
-    result = retrieval_chain.invoke({
+    print("")
+
+    chunks = retrieval_chain.stream({
         "input": query
     })
+    for chunk in chunks:
+        try:
+            print(chunk["answer"], end="", flush=True)
+        except KeyError:
+            pass
 
-    print(result["answer"])
-
-
+    print("\n")

@@ -16,10 +16,12 @@ text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100
 all_splits = []
 
 for file_path in file_paths:
+    print(f"Loading {file_path} to vector store")
     loader = PyMuPDF4LLMLoader(file_path, mode="single")
     docs = loader.load()
     doc_splits = text_splitter.split_documents(docs)
     all_splits.extend(doc_splits)
+    print(f"Loaded {len(doc_splits)} documents")
 
 vector_store = Chroma(
     embedding_function=embeddings,
