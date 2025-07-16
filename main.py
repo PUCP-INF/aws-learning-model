@@ -21,12 +21,14 @@ retriever = vector_store.as_retriever(
 )
 
 prompt = """
-Answer in spanish briefly
+You are an academic tutor specialized in key AWS concepts and programming topics. Your goal is to provide accurate answers based on the information presented to you.
+
+Please answer in Spanish and be brief.
 
 {context}
 
 Question: {input}
-Answer: /no_think"""
+Answer: If the answer to the question CANNOT be directly inferred from the supplied {context}, state "No dispongo de esa información en el contexto actual.". If the information is present, proceed with the answer. /no_think"""
 
 prompt_template = ChatPromptTemplate.from_template(prompt)
 combine_docs_chain = create_stuff_documents_chain(llm, prompt_template)
